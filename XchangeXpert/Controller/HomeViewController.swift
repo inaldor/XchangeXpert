@@ -12,23 +12,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     //var currencies = [Currencies]()
     
-    var currencies: [String] = []
+//    var currencies: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            let jsonURL = Bundle.main.url(forResource: "currencies", withExtension: "json")
-            let jsonDecoder = JSONDecoder()
-            let jsonData = try Data(contentsOf: jsonURL!)
-            let jsonSentence = try jsonDecoder.decode([String].self, from: jsonData)
-            currencies = jsonSentence
-            debugPrint(currencies[1])
-            print(currencies.count)
-
-        } catch {
-            print(error)
-        }
+//        do {
+//            let jsonURL = Bundle.main.url(forResource: "currencies", withExtension: "json")
+//            let jsonDecoder = JSONDecoder()
+//            let jsonData = try Data(contentsOf: jsonURL!)
+//            let jsonSentence = try jsonDecoder.decode([String].self, from: jsonData)
+//            currencies = jsonSentence
+//            //debugPrint(currencies[1])
+//            //print(currencies.count)
+//
+//        } catch {
+//            print(error)
+//        }
 
 //        do {
 //            let data = try Data(contentsOf: Bundle.main.url(forResource: "currencies", withExtension: "json")!)
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currencies.count
+        return 10
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
