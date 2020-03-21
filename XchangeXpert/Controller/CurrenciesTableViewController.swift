@@ -12,7 +12,7 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
         
     var currencies: [String] = []
     var selectedCurrencies: [String] = []
-    var cellsSelected = [Cell]()
+    //var cellsSelected = [Cell]()
     
     
     override func viewDidLoad() {
@@ -142,8 +142,33 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
             
         }
         
-        print(selectedCurrencies)
-//        
+        if selectedCurrencies.count == 2 {
+            
+            guard let firstCurrency = selectedCurrencies.first else { return }
+            guard let secondCurrency = selectedCurrencies.last else { return }
+            
+            let currenciesCombined = "\(firstCurrency)" + "\(secondCurrency)"
+            
+            print(currenciesCombined)
+            
+            //UserDefaults.standard.setCurrencies(value: <#T##[String]#>)
+            
+            //UserDefaults.currenciesSelected?.append(currenciesCombined)
+            
+//            let usD = UserDefaults.standard
+//            var urls = usD.intArray
+//            urls.append(currenciesCombined)
+//            usD.intArray
+            
+            let userDefaults = UserDefaults.standard
+            var udArray = userDefaults.stringArray(forKey: "currencies_selected") ?? []
+            udArray.append(currenciesCombined)
+            userDefaults.set(udArray, forKey: "currencies_selected")
+            
+            /// Pushing a new ViewController
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+//
 //        let ok = itemsArray[indexPath.row].id
 //
 //        let vc = ItemDetailViewController()
@@ -160,7 +185,6 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
         selectedCurrencies = selectedCurrencies.filter { $0 != currencyName }
         
         print(selectedCurrencies)
-        
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

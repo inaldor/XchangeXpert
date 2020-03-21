@@ -9,6 +9,6 @@
 /// The enum describing the API constants.
 enum APIConstants {
     
-    static let baseURL = "http://dynamic.pulselive.com/test/native/"
+    static let baseURL = "https://europe-west1-revolut-230009.cloudfunctions.net/revolut-ios?"
     
 }

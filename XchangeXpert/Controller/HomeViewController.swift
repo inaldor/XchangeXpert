@@ -12,10 +12,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     //var currencies = [Currencies]()
     
-//    var currencies: [String] = []
+    var rates: [String:Double] = [:]
+    
+    /// Variable to store the ID of the selected item
+    //var currencyPairs: [String:Double] = [:]
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        fetchRates()
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //guard let currenciesSelected = UserDefaults.currenciesSelected? else { return }
+        
+        //print(currenciesSelected)
+        
+        //print(UserDefaults.standard.intArray)
+
         
 //        do {
 //            let jsonURL = Bundle.main.url(forResource: "currencies", withExtension: "json")
@@ -87,18 +103,63 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     }
 
+    func fetchRates() {
+        
+        rates = [:]
+        
+        let userDefaults = UserDefaults.standard
+        let value = userDefaults.stringArray(forKey: "currencies_selected") ?? []
+        print(value)
+        
+        //let array = ["GBPUSD","GBPBRL","EURUSD","USDBRL"]
+        
+        /// Call for the Service to fetch the items from the API
+        Service.shared.fetchItems(currencyPairs: value) { (items, error) in
+                   
+                /// Checking for errors after try to fetching the items
+                if let error = error {
+                   print("Failed to fetch items:", error)
+                   return
+                }
+                
+                if let items = items {
+                    
+                    //guard let ite = items else { return }
+                    
+                    self.rates = items
+                        
+                    print(items)
+                    
+                    /// Sharing the ID of the item selected with other ViewController
+                    //let viewController = HomeViewController()
+                    //viewController.currencyPairs = items
+                    
+                    /// Pushing a new ViewController
+                    //self.navigationController?.popToRootViewController(animated: true)
+                    
+                }
+                
+        }
+        
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return rates.count
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! HomeTableViewCell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! HomeTableViewCell
+        
+        //cell.currencyMainLabel.text = rates[indexPath.row]
+        //    cell.currencyComparedLabel.text =
+        //    cell.rateLabel.text =
+        
     //
             
             //cell.currencyName.text = "ok"
             
-            cell.currencyName.text = "ok"
+            //cell.currencyName.text = "ok"
             
             //cell.textLabel?.text = "ok"
             

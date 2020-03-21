@@ -10,7 +10,8 @@ import UIKit
 
 class HomeTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var currencyName: UILabel!
-    
+    @IBOutlet weak var currencyMainLabel: UILabel!
+    @IBOutlet weak var currencyComparedLabel: UILabel!
+    @IBOutlet weak var rateLabel: UILabel!
     
 }
