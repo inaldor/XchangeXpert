@@ -10,10 +10,15 @@ import UIKit
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    //var currencies = [Currencies]()
+    @IBOutlet weak var tableView: UITableView!
     
-    var rates: [String:Double] = [:]
     
+    //var rates: [String:Double] = [:]
+    var rates: [Double] = []
+    var currencyBase: [String] = []
+    var currencyOutput: [String] = []
+    
+    //let myTableView = UITableView()
     /// Variable to store the ID of the selected item
     //var currencyPairs: [String:Double] = [:]
     
@@ -25,6 +30,16 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //myTableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        
+        //self.myTableView.delegate = self
+        //self.myTableView.dataSource = self
+        
+        //myTableView.delegate = self
+        //myTableView.dataSource = self
+        //tableView.delegate = self
+        //tableView.dataSource = self
         
         //guard let currenciesSelected = UserDefaults.currenciesSelected? else { return }
         
@@ -105,7 +120,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func fetchRates() {
         
-        rates = [:]
+        //rates = [:]
         
         let userDefaults = UserDefaults.standard
         let value = userDefaults.stringArray(forKey: "currencies_selected") ?? []
@@ -126,10 +141,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     
                     //guard let ite = items else { return }
                     
-                    self.rates = items
+                    //self.rates = items
                         
-                    print(items)
+                    //print(items)
                     
+                    //self.itemsArray =  ite.items.map( { $0 } )
+
+                    self.rates = items.map( { $0.value } )
+                    
+                    self.currencyBase = items.map( { String($0.key.dropLast(3)) } )
+                    //self.currencyBase.dropLast(3)
+                    
+                    self.currencyOutput = items.map( { String($0.key.dropFirst(3)) } )
+                    //self.currencyOutput.dropFirst(3)
+                    
+                    print(items)
+                    print(self.rates)
+                    print(self.currencyBase)
+                    print(self.currencyOutput)
                     /// Sharing the ID of the item selected with other ViewController
                     //let viewController = HomeViewController()
                     //viewController.currencyPairs = items
@@ -137,6 +166,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     /// Pushing a new ViewController
                     //self.navigationController?.popToRootViewController(animated: true)
                     
+                    // .tableView.reloadData()
+                    
+                    self.tableView.reloadData()
+                    
+                    //self.myTableView.reloadData()
                 }
                 
         }
@@ -144,12 +178,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rates.count
+        return self.currencyBase.count
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! HomeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! HomeViewCell
+        
+        
+        //cell.currencyMain.text = "ok"
+        
+        cell.currencyMain.text = currencyBase[indexPath.row]
+        cell.currencyCompared.text = currencyOutput[indexPath.row]
+        cell.rate.text = String(rates[indexPath.row])
+        
+        //cell.currencyMainLabel.text = "ok"
+        //cell.currencyComparedLabel.text = "ok2"
+        //cell.rateLabel.text = "ok3"
         
         //cell.currencyMainLabel.text = rates[indexPath.row]
         //    cell.currencyComparedLabel.text =

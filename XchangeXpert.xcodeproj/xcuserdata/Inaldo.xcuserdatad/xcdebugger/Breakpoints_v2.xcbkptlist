@@ -23,15 +23,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "98FBF53E-E0B7-414B-8A9A-E899995B7C0E"
+            uuid = "F838EE6C-38F7-4A21-A32E-2594E413510D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XchangeXpert/Controller/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "fetchRates()"
             landmarkType = "7">
          </BreakpointContent>
