@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002A0957242FAEA800E82998 /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A0956242FAEA800E82998 /* FetchService.swift */; };
 		00366BBC24252079004D9472 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00366BBB24252079004D9472 /* UserDefaults.swift */; };
 		00366BBE24280296004D9472 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00366BBD24280296004D9472 /* HomeViewCell.swift */; };
 		00A078B1241EF3470012FA8B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A078B0241EF3470012FA8B /* APIConstants.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002A0956242FAEA800E82998 /* FetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
 		00366BBB24252079004D9472 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		00366BBD24280296004D9472 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		00A078B0241EF3470012FA8B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002A0955242FAE7800E82998 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				002A0956242FAEA800E82998 /* FetchService.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		00366BBA24252069004D9472 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +122,7 @@
 				00B31275240B08BC0006BCDC /* Controller */,
 				00B31274240B08B40006BCDC /* View */,
 				00B31273240B08AB0006BCDC /* Model */,
+				002A0955242FAE7800E82998 /* Helpers */,
 				00B1D8A523F09AA10041D98A /* AppDelegate.swift */,
 				00B1D8A923F09AA10041D98A /* Main.storyboard */,
 				00B1D8AC23F09AA30041D98A /* Assets.xcassets */,
@@ -276,6 +287,7 @@
 				00B31272240B089F0006BCDC /* CurrenciesTableViewController.swift in Sources */,
 				00366BBC24252079004D9472 /* UserDefaults.swift in Sources */,
 				00B1D8A823F09AA10041D98A /* HomeViewController.swift in Sources */,
+				002A0957242FAEA800E82998 /* FetchService.swift in Sources */,
 				00A078B1241EF3470012FA8B /* APIConstants.swift in Sources */,
 				00366BBE24280296004D9472 /* HomeViewCell.swift in Sources */,
 				00B3127C240C6B0A0006BCDC /* CurrenciesTableViewCell.swift in Sources */,

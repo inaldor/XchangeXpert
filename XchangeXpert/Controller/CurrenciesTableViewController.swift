@@ -13,14 +13,24 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
     var currencies: [String] = []
     var selectedCurrencies: [String] = []
     //var cellsSelected = [Cell]()
-    
+ 
+    let userDefaults = UserDefaults.standard
+    var udArray = UserDefaults.standard.stringArray(forKey: "currencies_selected") ?? []
+    //var  = userDefaults.
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //tableView.allowsMultipleSelection = true
         //tableView.allowsMultipleSelectionDuringEditing = true
-        
+    
+        fetchListCurrencies()
+        //fetchData()
+                
+    }
+    
+    fileprivate func fetchListCurrencies() {
+
         do {
            let jsonURL = Bundle.main.url(forResource: "currencies", withExtension: "json")
            let jsonDecoder = JSONDecoder()
@@ -34,29 +44,6 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
            print(error)
         }
         
-     
-        fetchItems()
-        fetchData()
-                
-    }
-    
-    fileprivate func fetchItems() {
-//        Service.shared.fetchItems { (items, error) in
-//            if let error = error {
-//                print("Failed to fetch items:", error)
-//                return
-//            }
-//
-//            guard let ite = items else { return }
-//
-//            self.itemsArray =  ite.items.map( { $0 } )
-//
-//            self.itemsArray = self.itemsArray.sorted(by: { $0.id < $1.id })
-//
-//            self.itemUnique?.id = 32
-//
-//            self.tableView.reloadData()
-//        }
     }
     
     fileprivate func fetchData() {
@@ -129,6 +116,15 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
 //
 //        }
 //
+//
+//        let userDefaults = UserDefaults.standard
+//        let value = userDefaults.stringArray(forKey: "currencies_selected") ?? []
+//        print(value)
+//
+        //print(selectedCurrencies)
+        
+        
+        
         
         let currencyName = currencies[indexPath.row]
         
@@ -141,6 +137,8 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
             selectedCurrencies.append(currencies[indexPath.row])
             
         }
+        
+        print(selectedCurrencies)
         
         if selectedCurrencies.count == 2 {
             
@@ -160,15 +158,67 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
 //            urls.append(currenciesCombined)
 //            usD.intArray
             
-            let userDefaults = UserDefaults.standard
-            var udArray = userDefaults.stringArray(forKey: "currencies_selected") ?? []
             udArray.append(currenciesCombined)
             userDefaults.set(udArray, forKey: "currencies_selected")
             
             /// Pushing a new ViewController
             self.navigationController?.popToRootViewController(animated: true)
-        }
+            
+        } else if selectedCurrencies.count == 1 {
+            
+            guard let lastSelectedCurrency = selectedCurrencies.last else { return }
+                        
+            print(lastSelectedCurrency)
+            
+            //let ok = udArray.dropLast(3)
+            
+            //print(ok)
+            
+            let result = udArray.filter({ $0.dropLast(3) == lastSelectedCurrency })
+            
+            //contains(where: { $0.dropLast(3) == "BGN" })
+            
+            //let ok = ["BGN","IDR"]
+            
+            print(result)
+            
+            //et ok = result.map( { $0 })
+            
+            //let ok = result.map( { })
+              
+            //print(ok)
+                
+            //let sdok = currencies.filter({ $0.dropLast(3) != ok })
+            
+            for r in result {
+                print(r)
+                
+                guard let index = currencies.lastIndex(of: String(r.dropFirst(3))) else { return }
+                
+                currencies = currencies.filter({ $0 != r.dropFirst(3) })
+                
+                print(currencies)
+                
+                let indexPathrow = IndexPath(item: index, section: 0)
+                tableView.deleteRows(at: [indexPathrow], with: .fade)
+                
+                print(index)
+            }
+                
+            //currencies = currencies.filter({ $0.dropLast(3) != result })
+            
+            //currencies = currencies.filter { !result.contains($0) }
+            
+            print(currencies)
+            
+//            if udArray.dropLast(3).contains(selectedCurrencies.last!) {
+//                print("possui")
+//            } else {
 //
+//                print("nao possui")
+//            }
+            
+        }
 //        let ok = itemsArray[indexPath.row].id
 //
 //        let vc = ItemDetailViewController()
@@ -183,6 +233,9 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
         let currencyName = currencies[indexPath.row]
         
         selectedCurrencies = selectedCurrencies.filter { $0 != currencyName }
+        
+        fetchListCurrencies()
+        tableView.reloadData()
         
         print(selectedCurrencies)
     }

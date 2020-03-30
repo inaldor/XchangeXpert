@@ -23,6 +23,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
+                                    <action selector="addCurrencyPair:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E90-iB-oGn"/>
                                     <segue destination="hgQ-Al-utV" kind="show" id="RZh-Mc-TVn"/>
                                 </connections>
                             </button>
@@ -86,6 +87,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Rates &amp; Converter" id="ZxL-Wq-YcW"/>
                     <connections>
+                        <outlet property="addCurrencyPairButton" destination="lDO-Cg-0DB" id="J2n-OC-2Au"/>
                         <outlet property="tableView" destination="8k1-AV-uOI" id="Hdc-rN-Ob6"/>
                     </connections>
                 </viewController>
