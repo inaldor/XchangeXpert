@@ -22,6 +22,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var loadTableViewControl = true
     var timer: Timer!
     
+    let userDefaults = UserDefaults.standard
+    
     override func viewDidAppear(_ animated: Bool) {
         
         noRepeatControl = false
@@ -29,6 +31,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         loadTableViewControl = true
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.loop), userInfo: nil, repeats: true)
+        
+        let savedPairs = userDefaults.stringArray(forKey: "currencies_selected") ?? []
+           
+           if savedPairs.isEmpty {
+                print("Empty")
+                self.tableView.isHidden = true
+//                for constraint in self.view.constraints {
+//                    if constraint.identifier == "addPairButtonTopConstraint" {
+//                       constraint.constant = 150
+//                    }
+//                }
+            } else {
+                print(" not Empty")
+                self.tableView.isHidden = false
+//                for constraint in self.view.constraints {
+//                    if constraint.identifier == "addPairButtonTopConstraint" {
+//                       constraint.constant = 20
+//                    }
+//                }
+            }
 
     }
     
@@ -48,18 +70,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func fetchRates() {
         
-        let userDefaults = UserDefaults.standard
         let savedPairs = userDefaults.stringArray(forKey: "currencies_selected") ?? []
-        //print(savedPairs)
+//
+//        if savedPairs.isEmpty {
+//            print("Empty")
+//            for constraint in self.view.constraints {
+//                if constraint.identifier == "addPairButtonTopConstraint" {
+//                    constraint.constant = 50
+//                }
+//            }
+//        }
         
-        if savedPairs.isEmpty {
-            print("Empty")
-            
-            
-        } else {
-            print("Not Empty")
-        }
-
         /// Call for the Service to fetch the items from the API
         Service.shared.fetchItems(currencyPairs: savedPairs) { (items, error) in
                    
@@ -144,16 +165,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        let userDefaults = UserDefaults.standard
-        var value = userDefaults.stringArray(forKey: "currencies_selected") ?? []
+        var savedPairs = userDefaults.stringArray(forKey: "currencies_selected") ?? []
         
         if (editingStyle == .delete) {
            
             print(indexPath)
            
-            value.remove(at: indexPath.row)
+            savedPairs.remove(at: indexPath.row)
            
-            userDefaults.set(value, forKey: "currencies_selected")
+            userDefaults.set(savedPairs, forKey: "currencies_selected")
             
             currencyBase.remove(at: indexPath.row)
             currencyOutput.remove(at: indexPath.row)
@@ -165,7 +185,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
             tableView.deleteRows(at: [indexPath], with: .fade)
                     
-            print(value)
+            print(savedPairs)
             self.tableView.reloadData()
         }
     }
