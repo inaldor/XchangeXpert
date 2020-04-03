@@ -13,6 +13,8 @@ class HomeViewCell: UITableViewCell {
     @IBOutlet weak var currencyMain: UILabel!
     @IBOutlet weak var currencyCompared: UILabel!
     @IBOutlet weak var rate: UILabel!
+    @IBOutlet weak var currencyMainDescriptionLabel: UILabel!
+    @IBOutlet weak var currencyComparedDescriptionLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

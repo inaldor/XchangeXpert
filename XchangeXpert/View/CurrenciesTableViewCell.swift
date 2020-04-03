@@ -11,6 +11,8 @@ import UIKit
 class CurrenciesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var currencyName: UILabel!
+    @IBOutlet weak var currencyImageView: UIImageView!
+    @IBOutlet weak var currencyNameDescriptionLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

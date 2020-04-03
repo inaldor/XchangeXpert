@@ -14,6 +14,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var addCurrencyPairButton: UIButton!
     
+    @IBOutlet weak var addCurrencyPairTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addCurrencyPairHeightConstraint: NSLayoutConstraint!
+    
     var rates: [Double] = []
     var currencyBase: [String] = []
     var currencyOutput: [String] = []
@@ -39,10 +42,33 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.tableView.isHidden = true
 //                for constraint in self.view.constraints {
 //                    if constraint.identifier == "addPairButtonTopConstraint" {
-//                       constraint.constant = 150
+//                        constraint.constant = self.view.frame.size.height/3
 //                    }
 //                }
-            } else {
+            
+            //addCurrencyPairButton.frame.size = CGSize(width: 350, height: 100)
+            
+            //self.view.heght
+            
+            addCurrencyPairTopConstraint.constant = self.view.frame.size.height/3
+            addCurrencyPairHeightConstraint.constant = 100
+            
+            addCurrencyPairButton.titleLabel?.lineBreakMode = .byTruncatingMiddle
+            addCurrencyPairButton.titleLabel?.numberOfLines = 3
+            addCurrencyPairButton.titleLabel?.textAlignment = .center
+            
+            addCurrencyPairButton.setTitle("Add Currency Pair\nChoose a Currency pair to compare their live rates", for: .normal)
+           
+            addCurrencyPairButton.imageEdgeInsets.bottom = 30
+            addCurrencyPairButton.imageEdgeInsets.top = 3
+            addCurrencyPairButton.imageEdgeInsets.left = 25
+            addCurrencyPairButton.imageEdgeInsets.right = -285
+            
+            addCurrencyPairButton.titleEdgeInsets.bottom = -40
+            addCurrencyPairButton.titleEdgeInsets.top = -10
+            addCurrencyPairButton.titleEdgeInsets.left = -40
+            addCurrencyPairButton.titleEdgeInsets.right = 0
+           } else {
                 print(" not Empty")
                 self.tableView.isHidden = false
 //                for constraint in self.view.constraints {
@@ -50,6 +76,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //                       constraint.constant = 20
 //                    }
 //                }
+            
+            addCurrencyPairTopConstraint.constant = 20
+            addCurrencyPairHeightConstraint.constant = 40
+            
+            addCurrencyPairButton.setTitle("  Add Currency Pair", for: .normal)
+            addCurrencyPairButton.titleLabel?.lineBreakMode = .byTruncatingMiddle
+            addCurrencyPairButton.titleLabel?.numberOfLines = 3
+            addCurrencyPairButton.titleLabel?.textAlignment = .center
+            
+            addCurrencyPairButton.imageEdgeInsets.bottom = 0
+            addCurrencyPairButton.imageEdgeInsets.top = 0
+            addCurrencyPairButton.imageEdgeInsets.left = 0
+            addCurrencyPairButton.imageEdgeInsets.right = 0
+            
+            addCurrencyPairButton.titleEdgeInsets.bottom = 10
+            addCurrencyPairButton.titleEdgeInsets.top = 0
+            addCurrencyPairButton.titleEdgeInsets.left = 0
+            addCurrencyPairButton.titleEdgeInsets.right = 0
             }
 
     }
