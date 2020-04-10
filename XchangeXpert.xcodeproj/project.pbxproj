@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		002A0957242FAEA800E82998 /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A0956242FAEA800E82998 /* FetchService.swift */; };
-		00366BBC24252079004D9472 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00366BBB24252079004D9472 /* UserDefaults.swift */; };
+		002A09592438EF5B00E82998 /* CurrencyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A09582438EF5B00E82998 /* CurrencyDetails.swift */; };
+		002A095C243E147F00E82998 /* SplitString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A095B243E147F00E82998 /* SplitString.swift */; };
 		00366BBE24280296004D9472 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00366BBD24280296004D9472 /* HomeViewCell.swift */; };
 		00A078B1241EF3470012FA8B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A078B0241EF3470012FA8B /* APIConstants.swift */; };
 		00A078B3241EF3650012FA8B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A078B2241EF3650012FA8B /* APIError.swift */; };
@@ -25,8 +26,6 @@
 		00B3127A240B099B0006BCDC /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 00B31278240B099B0006BCDC /* currencies.json */; };
 		00B3127C240C6B0A0006BCDC /* CurrenciesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3127B240C6B0A0006BCDC /* CurrenciesTableViewCell.swift */; };
 		00B3127D240C6B0A0006BCDC /* CurrenciesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3127B240C6B0A0006BCDC /* CurrenciesTableViewCell.swift */; };
-		00B3127F240C6C8A0006BCDC /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3127E240C6C8A0006BCDC /* Currencies.swift */; };
-		00B31280240C6C8A0006BCDC /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3127E240C6C8A0006BCDC /* Currencies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +40,8 @@
 
 /* Begin PBXFileReference section */
 		002A0956242FAEA800E82998 /* FetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
-		00366BBB24252079004D9472 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		002A09582438EF5B00E82998 /* CurrencyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetails.swift; sourceTree = "<group>"; };
+		002A095B243E147F00E82998 /* SplitString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitString.swift; sourceTree = "<group>"; };
 		00366BBD24280296004D9472 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		00A078B0241EF3470012FA8B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		00A078B2241EF3650012FA8B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -60,7 +60,6 @@
 		00B31271240B089F0006BCDC /* CurrenciesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesTableViewController.swift; sourceTree = "<group>"; };
 		00B31278240B099B0006BCDC /* currencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currencies.json; sourceTree = "<group>"; };
 		00B3127B240C6B0A0006BCDC /* CurrenciesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesTableViewCell.swift; sourceTree = "<group>"; };
-		00B3127E240C6C8A0006BCDC /* Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				002A0956242FAEA800E82998 /* FetchService.swift */,
+				002A095B243E147F00E82998 /* SplitString.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -92,7 +92,8 @@
 		00366BBA24252069004D9472 /* Stores */ = {
 			isa = PBXGroup;
 			children = (
-				00366BBB24252079004D9472 /* UserDefaults.swift */,
+				00B31278240B099B0006BCDC /* currencies.json */,
+				002A09582438EF5B00E82998 /* CurrencyDetails.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -145,8 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				00366BBA24252069004D9472 /* Stores */,
-				00B3127E240C6C8A0006BCDC /* Currencies.swift */,
-				00B31278240B099B0006BCDC /* currencies.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,9 +282,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002A09592438EF5B00E82998 /* CurrencyDetails.swift in Sources */,
 				00A078B9241FFEE90012FA8B /* Conversion.swift in Sources */,
 				00B31272240B089F0006BCDC /* CurrenciesTableViewController.swift in Sources */,
-				00366BBC24252079004D9472 /* UserDefaults.swift in Sources */,
+				002A095C243E147F00E82998 /* SplitString.swift in Sources */,
 				00B1D8A823F09AA10041D98A /* HomeViewController.swift in Sources */,
 				002A0957242FAEA800E82998 /* FetchService.swift in Sources */,
 				00A078B1241EF3470012FA8B /* APIConstants.swift in Sources */,
@@ -293,7 +293,6 @@
 				00B3127C240C6B0A0006BCDC /* CurrenciesTableViewCell.swift in Sources */,
 				00B1D8A623F09AA10041D98A /* AppDelegate.swift in Sources */,
 				00A078B5241EF3870012FA8B /* Service.swift in Sources */,
-				00B3127F240C6C8A0006BCDC /* Currencies.swift in Sources */,
 				00A078B3241EF3650012FA8B /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,7 +301,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00B31280240C6C8A0006BCDC /* Currencies.swift in Sources */,
 				00B3127D240C6B0A0006BCDC /* CurrenciesTableViewCell.swift in Sources */,
 				00B1D8BB23F09AA40041D98A /* XchangeXpertTests.swift in Sources */,
 			);
