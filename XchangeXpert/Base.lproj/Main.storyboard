@@ -88,6 +88,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="BbE-XA-GeP" firstAttribute="leading" secondItem="X8G-zh-QDy" secondAttribute="leading" constant="29.5" id="2nW-bz-n2d"/>
                                                 <constraint firstItem="7x1-ss-P0Q" firstAttribute="leading" secondItem="Bro-rB-0yt" secondAttribute="trailing" constant="3" id="2rm-kh-ofv"/>
                                                 <constraint firstAttribute="trailing" secondItem="KMr-hR-1ME" secondAttribute="trailing" constant="15" id="3Cm-qm-8kd"/>
                                                 <constraint firstItem="G5K-Hf-Omc" firstAttribute="top" secondItem="X8G-zh-QDy" secondAttribute="top" constant="12" id="47e-I4-Bjz"/>
@@ -152,16 +153,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0GK-La-s63">
-                                <rect key="frame" x="0.0" y="151" width="375" height="516"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0GK-La-s63">
+                                <rect key="frame" x="0.0" y="132" width="375" height="535"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="yV3-Qa-4gk" customClass="CurrenciesTableViewCell" customModule="XchangeXpert" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yV3-Qa-4gk" id="KdL-Gg-QhS">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7q-Dd-Od9">
@@ -219,8 +219,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="LKb-1W-h2O" firstAttribute="top" secondItem="Dht-nD-G7A" secondAttribute="top" constant="25" id="0vz-BR-f7a"/>
+                            <constraint firstItem="0GK-La-s63" firstAttribute="bottom" secondItem="Dht-nD-G7A" secondAttribute="bottom" id="GIK-r3-Orc"/>
+                            <constraint firstItem="0GK-La-s63" firstAttribute="top" secondItem="LKb-1W-h2O" secondAttribute="bottom" constant="20" id="e5Z-OO-FGt"/>
                             <constraint firstItem="LKb-1W-h2O" firstAttribute="centerX" secondItem="Dht-nD-G7A" secondAttribute="centerX" id="in2-He-nsH"/>
+                            <constraint firstItem="0GK-La-s63" firstAttribute="centerX" secondItem="LKb-1W-h2O" secondAttribute="centerX" id="kNV-Hj-oe8"/>
                             <constraint firstItem="LKb-1W-h2O" firstAttribute="leading" secondItem="Dht-nD-G7A" secondAttribute="leading" constant="16" id="psG-Gd-S2k"/>
+                            <constraint firstItem="0GK-La-s63" firstAttribute="leading" secondItem="Dht-nD-G7A" secondAttribute="leading" id="zqM-ZS-dfv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Dht-nD-G7A"/>
                     </view>

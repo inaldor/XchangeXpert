@@ -8,38 +8,41 @@
 
 import UIKit
 
-protocol Split {
+protocol Management {
     //func extractElement(entireString: String) -> [String?]
-    func extractArrayElement(entireString: [String]) -> [String]
+    func extractSavedCurrencies() -> [String]
+    func extractCurrencyBaseDesc() -> [String]
+    func extractCurrencyQuoteDesc() -> [String]
+    func removeArrayElement(position: Int) -> [String]
 }
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak private var tableView: UITableView!
     
-    @IBOutlet weak var addCurrencyPairButton: UIButton!
+    @IBOutlet weak private var addCurrencyPairButton: UIButton!
     
-    @IBOutlet weak var addCurrencyPairTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var addCurrencyPairHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var addCurrencyPairTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var addCurrencyPairHeightConstraint: NSLayoutConstraint!
     
-    var rates: [Double] = []
-    var currencyBase: [String] = []
-    var currencyOutput: [String] = []
+    private var rates: [Double] = []
+    private var currencyBase: [String] = []
+    private var currencyOutput: [String] = []
     
-    var currencyBaseDesc: [String] = []
-    var currencyOutputDesc: [String] = []
-    var savedPairCurrencies: [String] = []
+    private var currencyBaseDesc: [String] = []
+    private var currencyQuoteDesc: [String] = []
+    private var savedPairCurrencies: [String] = []
     
-    var noRepeatControl = false
-    var loadTableViewControl = true
-    var timer: Timer!
+    private var noRepeatControl = false
+    private var loadTableViewControl = true
+    private var timer: Timer!
     
-    let userDefaults = UserDefaults.standard
+    //let userDefaults = UserDefaults.standard
     
-    var splitContainer: Split
+    private var manageContainer: Management
     
     required public init?(coder aDecoder: NSCoder) {
-        splitContainer = SplitString()
+        manageContainer = ManageCurrencies()
         super.init(coder: aDecoder)
     }
     
@@ -62,13 +65,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         loadTableViewControl = true
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.loop), userInfo: nil, repeats: true)
-        
         //print(savedPairCurrenciesOdd)
         
         //let savedPairCurrenciesOdd = oddElements.filter({ $0.dropLast(3) == lastSelectedCurrency })
         
-        manageCurrencies()
+        //manageCurrencies()
+        
+        savedPairCurrencies = manageContainer.extractSavedCurrencies()
+        currencyBaseDesc = manageContainer.extractCurrencyBaseDesc()
+        currencyQuoteDesc = manageContainer.extractCurrencyQuoteDesc()
         
         if savedPairCurrencies.isEmpty {
             print("Empty")
@@ -137,13 +142,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             addCurrencyPairButton.titleEdgeInsets.left = 0
             addCurrencyPairButton.titleEdgeInsets.right = 0
         }
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.loop), userInfo: nil, repeats: true)
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        manageCurrencies()
+        //manageCurrencies()
+        
+        savedPairCurrencies = manageContainer.extractSavedCurrencies()
+        currencyBaseDesc = manageContainer.extractCurrencyBaseDesc()
+        currencyQuoteDesc = manageContainer.extractCurrencyQuoteDesc()
         
         fetchRates()
         
@@ -158,27 +169,27 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func manageCurrencies() {
-        
-        let savedPairs = userDefaults.stringArray(forKey: "currencies_selected") ?? []
-        savedPairCurrencies = stride(from: 0, to: savedPairs.count, by: 2).map { savedPairs[$0] }
-        
-        print(savedPairCurrencies)
-        
-        let savedPairCurrenciesEven = stride(from: 1, to: savedPairs.count, by: 2).map { savedPairs[$0] }
-        let savedCurrencyDescriptions = splitContainer.extractArrayElement(entireString: savedPairCurrenciesEven)
-        
-        print(savedCurrencyDescriptions)
-        
-        //print(ok)
-        
-        currencyBaseDesc = stride(from: 0, to: savedCurrencyDescriptions.count, by: 2).map { savedCurrencyDescriptions[$0] }
-        currencyOutputDesc = stride(from: 1, to: savedCurrencyDescriptions.count, by: 2).map { savedCurrencyDescriptions[$0] }
-        
-        print(currencyBaseDesc)
-        print(currencyOutputDesc)
-        
-    }
+//    func manageCurrencies() {
+//
+//        let savedPairs = UserDefaults.selectedCurrencies
+//        savedPairCurrencies = stride(from: 0, to: savedPairs.count, by: 2).map { savedPairs[$0] }
+//
+//        print(savedPairCurrencies)
+//
+//        let savedPairCurrenciesEven = stride(from: 1, to: savedPairs.count, by: 2).map { savedPairs[$0] }
+//        let savedCurrencyDescriptions = splitContainer.extractArrayElement(entireString: savedPairCurrenciesEven)
+//
+//        print(savedCurrencyDescriptions)
+//
+//        //print(ok)
+//
+//        currencyBaseDesc = stride(from: 0, to: savedCurrencyDescriptions.count, by: 2).map { savedCurrencyDescriptions[$0] }
+//        currencyOutputDesc = stride(from: 1, to: savedCurrencyDescriptions.count, by: 2).map { savedCurrencyDescriptions[$0] }
+//
+//        print(currencyBaseDesc)
+//        print(currencyOutputDesc)
+//
+//    }
 
     //func addDataOfCurrencies() {
         
@@ -200,7 +211,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //
 //    }
     
-    func fetchRates() {
+    private func fetchRates() {
         
         //let savedPairs = userDefaults.stringArray(forKey: "currencies_selected") ?? []
         
@@ -276,243 +287,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //print(currencyBaseDesc)
+          //      print(currencyQuoteDesc)
+            //    print(savedPairCurrencies)
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! HomeViewCell
         
         cell.currencyMain.text = currencyBase[indexPath.row]
         cell.currencyCompared.text = currencyOutput[indexPath.row]
         cell.rate.text = String(rates[indexPath.row])
-        
-        
-//        for element in currencyData {
-//
-//            if element.isoCode == currencies[indexPath.row] {
-//
-//                cell.currencyNameDescriptionLabel.text = element.nameDescription
-//                cell.currencyImageView.image = UIImage(named: "\(element.nameDescription)")
-//
-//            }
-//
-//        }
-        
-        //let savedPairs = userDefaults.stringArray(forKey: "currencies_selected") ?? []
-        
-        //let savedPairCurrenciesEven = stride(from: 1, to: savedPairs.count, by: 2).map { savedPairs[$0] }
-        
-        //print(savedPairCurrenciesEven)
-        
-        //let ok = splitContainer.extractElement(entireString: savedPairCurrenciesEven[indexPath.row])
-        
-        //print(ok)
-        
         cell.currencyMainDescriptionLabel.text = currencyBaseDesc[indexPath.row]
-        
-        cell.currencyComparedDescriptionLabel.text = currencyOutputDesc[indexPath.row]
-                
-//        switch currencyOutput[indexPath.row] {
-//
-//            case "AUD":
-//                cell.currencyComparedDescriptionLabel.text = "Australian Dollar"
-//
-//            case "BGN":
-//                cell.currencyComparedDescriptionLabel.text = "Bulgarian Lev"
-//
-//            case "BRL":
-//                cell.currencyComparedDescriptionLabel.text = "Brazilian Real"
-//
-//            case "CAD":
-//                cell.currencyComparedDescriptionLabel.text = "Canadian Dollar"
-//
-//            case "CHF":
-//                cell.currencyComparedDescriptionLabel.text = "Swiss Franc"
-//
-//            case "CNY":
-//                cell.currencyComparedDescriptionLabel.text = "Renminbi"
-//
-//            case "CZK":
-//                cell.currencyComparedDescriptionLabel.text = "Czech Koruna"
-//
-//            case "DKK":
-//                cell.currencyComparedDescriptionLabel.text = "Danish Krone"
-//
-//            case "EUR":
-//                cell.currencyComparedDescriptionLabel.text = "Euro"
-//
-//            case "GBP":
-//                cell.currencyComparedDescriptionLabel.text = "Pound Sterling"
-//
-//            case "HKD":
-//                cell.currencyComparedDescriptionLabel.text = "Hong Kong Dollar"
-//
-//            case "HRK":
-//                cell.currencyComparedDescriptionLabel.text = "Croatian Kuna"
-//
-//            case "HUF":
-//                cell.currencyComparedDescriptionLabel.text = "Hungarian Forint"
-//
-//            case "IDR":
-//                cell.currencyComparedDescriptionLabel.text = "Indonesian Rupiah"
-//
-//            case "ILS":
-//                cell.currencyComparedDescriptionLabel.text = "Israeli New Shekel"
-//
-//            case "INR":
-//                cell.currencyComparedDescriptionLabel.text = "Indian Rupee"
-//
-//            case "ISK":
-//                cell.currencyComparedDescriptionLabel.text = "Icelandic Króna"
-//
-//            case "JPY":
-//                cell.currencyComparedDescriptionLabel.text = "Japanese Yen"
-//
-//            case "KRW":
-//                cell.currencyComparedDescriptionLabel.text = "South Korean Won"
-//
-//            case "MXN":
-//                cell.currencyComparedDescriptionLabel.text = "Mexican Peso"
-//
-//            case "MYR":
-//                cell.currencyComparedDescriptionLabel.text = "Malaysian Ringgit"
-//
-//            case "NOK":
-//                cell.currencyComparedDescriptionLabel.text = "Norwegian Krone"
-//
-//            case "NZD":
-//                cell.currencyComparedDescriptionLabel.text = "New Zealand Dollar"
-//
-//            case "PHP":
-//                cell.currencyComparedDescriptionLabel.text = "Philippine Peso"
-//
-//            case "PLN":
-//                cell.currencyComparedDescriptionLabel.text = "Polish Złoty"
-//
-//            case "RON":
-//                cell.currencyComparedDescriptionLabel.text = "Romanian Leu"
-//
-//            case "RUB":
-//                cell.currencyComparedDescriptionLabel.text = "Russian Ruble"
-//
-//            case "SEK":
-//                cell.currencyComparedDescriptionLabel.text = "Swedish Krona"
-//
-//            case "SGD":
-//                cell.currencyComparedDescriptionLabel.text = "Singapore Dollar"
-//
-//            case "THB":
-//                cell.currencyComparedDescriptionLabel.text = "Thai Baht"
-//
-//            case "USD":
-//                cell.currencyComparedDescriptionLabel.text = "United States Dollar"
-//
-//            case "ZAR":
-//                cell.currencyComparedDescriptionLabel.text = "South African Rand"
-//
-//            default:
-//            print("Unknown")
-//
-//        }
-//
-//        switch currencyBase[indexPath.row] {
-//
-//            case "AUD":
-//                cell.currencyMainDescriptionLabel.text = "Australian Dollar"
-//
-//            case "BGN":
-//                cell.currencyMainDescriptionLabel.text = "Bulgarian Lev"
-//
-//            case "BRL":
-//                cell.currencyMainDescriptionLabel.text = "Brazilian Real"
-//
-//            case "CAD":
-//                cell.currencyMainDescriptionLabel.text = "Canadian Dollar"
-//
-//            case "CHF":
-//                cell.currencyMainDescriptionLabel.text = "Swiss Franc"
-//
-//            case "CNY":
-//                cell.currencyMainDescriptionLabel.text = "Renminbi"
-//
-//            case "CZK":
-//                cell.currencyMainDescriptionLabel.text = "Czech Koruna"
-//
-//            case "DKK":
-//                cell.currencyMainDescriptionLabel.text = "Danish Krone"
-//
-//            case "EUR":
-//                cell.currencyMainDescriptionLabel.text = "Euro"
-//
-//            case "GBP":
-//                cell.currencyMainDescriptionLabel.text = "Pound Sterling"
-//
-//            case "HKD":
-//                cell.currencyMainDescriptionLabel.text = "Hong Kong Dollar"
-//
-//            case "HRK":
-//                cell.currencyMainDescriptionLabel.text = "Croatian Kuna"
-//
-//            case "HUF":
-//                cell.currencyMainDescriptionLabel.text = "Hungarian Forint"
-//
-//            case "IDR":
-//                cell.currencyMainDescriptionLabel.text = "Indonesian Rupiah"
-//
-//            case "ILS":
-//                cell.currencyMainDescriptionLabel.text = "Israeli New Shekel"
-//
-//            case "INR":
-//                cell.currencyMainDescriptionLabel.text = "Indian Rupee"
-//
-//            case "ISK":
-//                cell.currencyMainDescriptionLabel.text = "Icelandic Króna"
-//
-//            case "JPY":
-//                cell.currencyMainDescriptionLabel.text = "Japanese Yen"
-//
-//            case "KRW":
-//                cell.currencyMainDescriptionLabel.text = "South Korean Won"
-//
-//            case "MXN":
-//                cell.currencyMainDescriptionLabel.text = "Mexican Peso"
-//
-//            case "MYR":
-//                cell.currencyMainDescriptionLabel.text = "Malaysian Ringgit"
-//
-//            case "NOK":
-//                cell.currencyMainDescriptionLabel.text = "Norwegian Krone"
-//
-//            case "NZD":
-//                cell.currencyMainDescriptionLabel.text = "New Zealand Dollar"
-//
-//            case "PHP":
-//                cell.currencyMainDescriptionLabel.text = "Philippine Peso"
-//
-//            case "PLN":
-//                cell.currencyMainDescriptionLabel.text = "Polish Złoty"
-//
-//            case "RON":
-//                cell.currencyMainDescriptionLabel.text = "Romanian Leu"
-//
-//            case "RUB":
-//                cell.currencyMainDescriptionLabel.text = "Russian Ruble"
-//
-//            case "SEK":
-//                cell.currencyMainDescriptionLabel.text = "Swedish Krona"
-//
-//            case "SGD":
-//                cell.currencyMainDescriptionLabel.text = "Singapore Dollar"
-//
-//            case "THB":
-//                cell.currencyMainDescriptionLabel.text = "Thai Baht"
-//
-//            case "USD":
-//                cell.currencyMainDescriptionLabel.text = "United States Dollar"
-//
-//            case "ZAR":
-//                cell.currencyMainDescriptionLabel.text = "South African Rand"
-//
-//            default:
-//            print("Unknown")
-//
-//        }
+        cell.currencyComparedDescriptionLabel.text = currencyQuoteDesc[indexPath.row]
         
         return cell
     }
@@ -535,28 +320,38 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             //print(savedPairs)
             
+            UserDefaults.selectedCurrencies = manageContainer.removeArrayElement(position: indexPath.row)
+            
             currencyBaseDesc.remove(at: indexPath.row)
-            currencyOutputDesc.remove(at: indexPath.row)
+            currencyQuoteDesc.remove(at: indexPath.row)
             savedPairCurrencies.remove(at: indexPath.row)
-           
-            print(currencyBaseDesc)
-            print(currencyOutputDesc)
-            print(savedPairCurrencies)
             
             //savedPairs.remove(at: indexPath.row)
             //savedPairs.remove(at: indexPath.row)
            
-            userDefaults.set(savedPairCurrencies, forKey: "currencies_selected")
+            //UserDefaults.selectedCurrencies = savedPairCurrencies
+            
+            //userDefaults.set(savedPairCurrencies, forKey: "currencies_selected")
             
             currencyBase.remove(at: indexPath.row)
             currencyOutput.remove(at: indexPath.row)
             rates.remove(at: indexPath.row)
             
+            print(UserDefaults.selectedCurrencies)
+            
             print(currencyBase)
             print(currencyOutput)
             print(rates)
+            
+            print(currencyBaseDesc)
+            print(currencyQuoteDesc)
+            print(savedPairCurrencies)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            //savedPairCurrencies = manageContainer.extractSavedCurrencies()
+            //currencyBaseDesc = manageContainer.extractCurrencyBaseDesc()
+            //currencyQuoteDesc = manageContainer.extractCurrencyQuoteDesc()
                     
             self.tableView.reloadData()
         }

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002A0957242FAEA800E82998 /* FetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A0956242FAEA800E82998 /* FetchService.swift */; };
+		002867692449FCDB007ED613 /* ManageCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002867682449FCDB007ED613 /* ManageCurrencies.swift */; };
+		0028676B2449FDC0007ED613 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0028676A2449FDC0007ED613 /* UserDefaults.swift */; };
 		002A09592438EF5B00E82998 /* CurrencyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A09582438EF5B00E82998 /* CurrencyDetails.swift */; };
-		002A095C243E147F00E82998 /* SplitString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A095B243E147F00E82998 /* SplitString.swift */; };
 		00366BBE24280296004D9472 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00366BBD24280296004D9472 /* HomeViewCell.swift */; };
 		00A078B1241EF3470012FA8B /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A078B0241EF3470012FA8B /* APIConstants.swift */; };
 		00A078B3241EF3650012FA8B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A078B2241EF3650012FA8B /* APIError.swift */; };
@@ -39,9 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002A0956242FAEA800E82998 /* FetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchService.swift; sourceTree = "<group>"; };
+		002867682449FCDB007ED613 /* ManageCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCurrencies.swift; sourceTree = "<group>"; };
+		0028676A2449FDC0007ED613 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		002A09582438EF5B00E82998 /* CurrencyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDetails.swift; sourceTree = "<group>"; };
-		002A095B243E147F00E82998 /* SplitString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitString.swift; sourceTree = "<group>"; };
 		00366BBD24280296004D9472 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		00A078B0241EF3470012FA8B /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		00A078B2241EF3650012FA8B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -83,8 +83,7 @@
 		002A0955242FAE7800E82998 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				002A0956242FAEA800E82998 /* FetchService.swift */,
-				002A095B243E147F00E82998 /* SplitString.swift */,
+				002867682449FCDB007ED613 /* ManageCurrencies.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -94,6 +93,7 @@
 			children = (
 				00B31278240B099B0006BCDC /* currencies.json */,
 				002A09582438EF5B00E82998 /* CurrencyDetails.swift */,
+				0028676A2449FDC0007ED613 /* UserDefaults.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -285,14 +285,14 @@
 				002A09592438EF5B00E82998 /* CurrencyDetails.swift in Sources */,
 				00A078B9241FFEE90012FA8B /* Conversion.swift in Sources */,
 				00B31272240B089F0006BCDC /* CurrenciesTableViewController.swift in Sources */,
-				002A095C243E147F00E82998 /* SplitString.swift in Sources */,
 				00B1D8A823F09AA10041D98A /* HomeViewController.swift in Sources */,
-				002A0957242FAEA800E82998 /* FetchService.swift in Sources */,
 				00A078B1241EF3470012FA8B /* APIConstants.swift in Sources */,
 				00366BBE24280296004D9472 /* HomeViewCell.swift in Sources */,
 				00B3127C240C6B0A0006BCDC /* CurrenciesTableViewCell.swift in Sources */,
 				00B1D8A623F09AA10041D98A /* AppDelegate.swift in Sources */,
 				00A078B5241EF3870012FA8B /* Service.swift in Sources */,
+				002867692449FCDB007ED613 /* ManageCurrencies.swift in Sources */,
+				0028676B2449FDC0007ED613 /* UserDefaults.swift in Sources */,
 				00A078B3241EF3650012FA8B /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
