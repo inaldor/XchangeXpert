@@ -94,6 +94,7 @@ class CurrenciesTableViewController: UIViewController, UITableViewDelegate, UITa
         tableView.allowsMultipleSelectionDuringEditing = true
 
         cell.currencyName.text = currencies[indexPath.row]
+        //cell.currencyName.alpha = 0.5
         
         for element in currencyData {
             

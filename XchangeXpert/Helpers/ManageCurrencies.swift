@@ -6,7 +6,7 @@
 //  Copyright © 2020 Inaldo's Software Development. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class ManageCurrencies: Management {
     
@@ -84,5 +84,36 @@ class ManageCurrencies: Management {
         
         print(savedPairs)
         return savedPairs
+    }
+    
+    func formatRate(rate: Double) -> NSAttributedString {
+
+        let rateWithoutFormat = NSNumber(value: rate)
+        
+        //print(rateWithoutFormat)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.minimumFractionDigits = 4
+        let rateFormatted = numberFormatter.string(from: rateWithoutFormat)
+        
+        let rateWithoutComma = rateFormatted?.replacingOccurrences(of: ".", with: ",")
+        
+        let rateWithoutLastDigs = String(rateWithoutComma?.dropLast(2) ?? "X,XX")
+        
+        let rateLastDigs = String(rateWithoutComma?.suffix(2) ?? "XX")
+        
+        
+        let secondAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
+        let thirdAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
+
+        let firstString = NSMutableAttributedString()
+        let secondString = NSAttributedString(string: rateWithoutLastDigs, attributes: secondAttributes)
+        let thirdString = NSAttributedString(string: rateLastDigs, attributes: thirdAttributes)
+
+        firstString.append(secondString)
+        firstString.append(thirdString)
+        
+        return(firstString)
+        
     }
 }

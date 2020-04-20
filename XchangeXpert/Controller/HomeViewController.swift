@@ -14,6 +14,7 @@ protocol Management {
     func extractCurrencyBaseDesc() -> [String]
     func extractCurrencyQuoteDesc() -> [String]
     func removeArrayElement(position: Int) -> [String]
+    func formatRate(rate: Double) -> NSAttributedString
 }
 
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -264,8 +265,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
                         if let cell = self.tableView.cellForRow(at: indexPathrow) as? HomeViewCell {
                             // Update the cell
-                            cell.rate.text = String(self.rates[indexPathrow.row])
+                            
+                            let formattedString = self.manageContainer.formatRate(rate: self.rates[indexPathrow.row])
 
+                            cell.rate.attributedText = formattedString
                         }
                         indexOfElement += 1
                     }
@@ -295,9 +298,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         cell.currencyMain.text = currencyBase[indexPath.row]
         cell.currencyCompared.text = currencyOutput[indexPath.row]
-        cell.rate.text = String(rates[indexPath.row])
         cell.currencyMainDescriptionLabel.text = currencyBaseDesc[indexPath.row]
         cell.currencyComparedDescriptionLabel.text = currencyQuoteDesc[indexPath.row]
+        
+        let formattedString = self.manageContainer.formatRate(rate: rates[indexPath.row])
+        cell.rate.attributedText = formattedString
+        
+//        let rateWithoutFormat = rates[indexPath.row]
+//        //if rateWithoutFormat
+//
+//        let rateFormatted = round(1000*rateWithoutFormat)/1000
+//        print(rateFormatted)
+        
+        
         
         return cell
     }
@@ -353,7 +366,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //currencyBaseDesc = manageContainer.extractCurrencyBaseDesc()
             //currencyQuoteDesc = manageContainer.extractCurrencyQuoteDesc()
                     
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
         }
     }
 }
