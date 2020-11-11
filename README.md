@@ -13,9 +13,18 @@ This app aims to keep the user informed about the latest exchange rates of a cho
 
 ## Pictures
 
-<img src="oooo" width=300>
-<img src="oooo" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/homeempty.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/listcurrencies1.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/listcurrencies2.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/listcurrenciesselected.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/firspair.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/manypairs1.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/manypairs2.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/manypairs3.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/deleting1.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/deleting2.png" width=300>
+<img src="https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/app-images/deleting3.png" width=300>
 
 ## License
 
-This project is licensed under the [MIT License](oooo)
+This project is licensed under the [MIT License](https://github.com/inaldor/XchangeXpert/blob/bugs/bugfixes/LICENSE)
